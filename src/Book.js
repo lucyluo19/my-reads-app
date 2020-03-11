@@ -1,7 +1,7 @@
 import React from "react";
 import BookShelfChanger from "./BookShelfChanger";
 
-export const Book = ({ book, moveShelf }) => {
+export const Book = ({ book, bookShelf, moveShelf }) => {
   return (
     <li>
       <div className="book">
@@ -11,10 +11,18 @@ export const Book = ({ book, moveShelf }) => {
             style={{
               width: 128,
               height: 188,
-              backgroundImage: `url(${book.imageLinks.thumbnail})`
+              backgroundImage: `url(${
+                book.imageLinks
+                  ? book.imageLinks.thumbnail
+                  : "images/book-placeholder.jpg"
+              })`
             }}
           ></div>
-          <BookShelfChanger book={book} moveShelf={moveShelf} />
+          <BookShelfChanger
+            book={book}
+            bookShelf={bookShelf}
+            moveShelf={moveShelf}
+          />
         </div>
         <div className="book-title">{book.title}</div>
         <div className="book-authors">{book.authors}</div>

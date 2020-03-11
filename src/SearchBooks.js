@@ -1,31 +1,61 @@
 import React, { Component } from "react";
+import SearchResult from "./SearchResult";
+import { search } from "./BooksAPI";
+import { Link } from "react-router-dom";
 
 class SearchBooks extends Component {
+  state = {
+    searchResults: [],
+    query: ""
+  };
+
+  updateQuery = event => {
+    const value = event.target.value;
+    this.setState(() => ({ query: value.trim() }));
+    this.searchBook(this.state.query);
+  };
+
+  searchBook = query => {
+    if (query.length > 0) {
+      search(query).then(result => {
+        result.length > 0
+          ? this.setState(() => ({ searchResults: result }))
+          : this.setState(() => ({ searchResults: [] }));
+      });
+    }
+  };
+
+  resetSearch = () => {
+    this.setState(() => ({ searchResults: [] }));
+    this.setState(() => ({ query: "" }));
+  };
+
   render() {
+    const { searchResults, query } = this.state;
+    const { books, moveShelf } = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <button
-            className="close-search"
-            onClick={() => this.setState({ showSearchPage: false })}
-          >
-            Close
-          </button>
-          <div className="search-books-input-wrapper">
-            {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+          <Link to="/">
+            <button className="close-search" onClick={this.resetSearch}>
+              Close
+            </button>
+          </Link>
 
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
-            <input type="text" placeholder="Search by title or author" />
+          <div className="search-books-input-wrapper">
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              value={query}
+              onChange={this.updateQuery}
+            />
           </div>
         </div>
-        <div className="search-books-results">
-          <ol className="books-grid"></ol>
-        </div>
+        <SearchResult
+          books={books}
+          searchResult={searchResults}
+          moveShelf={moveShelf}
+        />
       </div>
     );
   }

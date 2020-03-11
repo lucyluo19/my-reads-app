@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class BookShelfChanger extends Component {
   state = {
-    currentBookShelf: this.props.book.shelf
+    currentBookShelf: this.props.bookShelf
   };
   changeShelf = event => {
     const { value } = event.target;
