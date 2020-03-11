@@ -10,7 +10,12 @@ const BookShelf = ({ bookshelf, books, moveShelf }) => {
       <div className="bookshelf-books">
         <ol className="books-grid">
           {booksOnSelf.map(book => (
-            <Book key={book.id} book={book} moveShelf={moveShelf} />
+            <Book
+              key={book.id}
+              book={book}
+              books={books}
+              moveShelf={moveShelf}
+            />
           ))}
         </ol>
       </div>

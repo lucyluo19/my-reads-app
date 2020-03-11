@@ -1,10 +1,10 @@
 import React from "react";
-import { getAll, update } from "./BooksAPI";
+import { getAll, update } from "./api/BooksAPI";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import ListBooks from "./ListBooks";
-import SearchBooks from "./SearchBooks";
-import { NotFound } from "./NotFound";
+import ListBooks from "./components/ListBooks";
+import SearchBooks from "./components/SearchBooks";
+import { NotFound } from "./components/common/NotFound";
 
 class BooksApp extends React.Component {
   state = {

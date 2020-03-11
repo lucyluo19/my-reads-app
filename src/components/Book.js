@@ -1,7 +1,7 @@
 import React from "react";
 import BookShelfChanger from "./BookShelfChanger";
 
-export const Book = ({ book, bookShelf, moveShelf }) => {
+export const Book = ({ book, books, moveShelf, resultBook, bookShelf }) => {
   return (
     <li>
       <div className="book">
@@ -20,6 +20,7 @@ export const Book = ({ book, bookShelf, moveShelf }) => {
           ></div>
           <BookShelfChanger
             book={book}
+            books={books}
             bookShelf={bookShelf}
             moveShelf={moveShelf}
           />
